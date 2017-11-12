@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Notes</title>
+    <script type="text/javascript" src="knockout-latest.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <style>
+      .errorText {
+        color: red;
+      }
+      .notes {
+        display: flex;
+      }
+      .note {
+        border: 1px solid gray;
+        margin: .5rem;
+        padding: .5rem;
+      }
+      .note__name {
+        font-weight: bold;
+        margin-bottom: .5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Notes</h1>
+    
+    <!-- ko if: errorText -->
+    <div class="errorText" data-bind="text: errorText"></div>
+    <!-- /ko -->
+
+    <div>
+      <input type="text" placeholder="User ID" data-bind="value: userId" />
+      <button data-bind="click: getNotes">GET</button>
+    </div>
+
+    <div>
+      <input type="text" placeholder="Name" data-bind="value: newNoteName" />
+      <input type="text" placeholder="Contents" data-bind="value: newNoteContents" />
+      <button data-bind="click: addNote">ADD</button>
+    </div>
+
+    <div class="notes" data-bind="foreach: notes">
+      <div class="note">
+        <button data-bind="click: $parent.deleteNote">DELETE</button>
+        <div class="note__name" data-bind="text: name"></div>
+        <div class="note__contents" data-bind="text: contents"></div>
+      </div>
+    </div>
+  </body>
+</html>
